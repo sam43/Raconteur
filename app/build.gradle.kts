@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.implementation
 
 plugins {
@@ -33,17 +32,16 @@ android {
         create("internal") {
             initWith(getByName("debug"))
             versionNameSuffix = "-I"
+            matchingFallbacks += listOf("debug", "release")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = "21"
-    }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     flavorDimensions += listOf("app", "env", "tier")
@@ -103,6 +101,16 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.android.compose)
     implementation(libs.coil.compose)
+
+    // CameraX
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    // ML Kit for face detection
+    implementation(libs.face.detection)
+
+    // Permission handling
+    implementation(libs.accompanist.permissions)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

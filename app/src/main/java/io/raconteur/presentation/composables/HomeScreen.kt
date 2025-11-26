@@ -1,5 +1,6 @@
 package io.raconteur.presentation.composables
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -13,4 +14,8 @@ fun HomeNavigation(modifier: Modifier = Modifier) {
     // one tap export (save to gallery)
     // chat tab, and profile tab
     // internal ML kit for face detection (firebase ML kit)
+    Text(
+        text = "Home",
+        modifier = modifier
+    )
 }

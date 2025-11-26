@@ -2,14 +2,14 @@ package io.raconteur.domain.usecase
 
 import io.raconteur.core.Result
 import io.raconteur.domain.model.XyzData
-import io.raconteur.domain.repository.StoryRepository
+import io.raconteur.domain.repository.ClipifyRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-private class FakeStoryRepository(private val stories: List<XyzData>) : StoryRepository {
-    override suspend fun getStories(): Result<List<XyzData>> = Result.Success(stories)
+private class FakeStoryRepository(private val stories: List<XyzData>) : ClipifyRepository {
+    override suspend fun getDataXyz(): Result<List<XyzData>> = Result.Success(stories)
 }
 
 class GetStoriesUseCaseTest {
