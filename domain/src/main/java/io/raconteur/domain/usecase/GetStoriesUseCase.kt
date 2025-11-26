@@ -2,10 +2,10 @@ package io.raconteur.domain.usecase
 
 import io.raconteur.core.Result
 import io.raconteur.core.base.UseCase
-import io.raconteur.domain.model.Story
-import io.raconteur.domain.repository.StoryRepository
+import io.raconteur.domain.model.XyzData
+import io.raconteur.domain.repository.ClipifyRepository
 
-class GetStoriesUseCase(private val repository: StoryRepository) : UseCase<Unit, Result<List<Story>>> {
-    override suspend operator fun invoke(params: Unit): Result<List<Story>> = repository.getStories()
-    suspend operator fun invoke(): Result<List<Story>> = invoke(Unit)
+class GetStoriesUseCase(private val repository: ClipifyRepository) : UseCase<Unit, Result<List<XyzData>>> {
+    override suspend operator fun invoke(params: Unit): Result<List<XyzData>> = repository.getDataXyz()
+    suspend operator fun invoke(): Result<List<XyzData>> = invoke(Unit)
 }

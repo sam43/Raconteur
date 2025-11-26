@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.implementation
 
 plugins {
@@ -28,6 +29,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+        // Inherits from debug, but adds a descriptive suffix
+        create("internal") {
+            initWith(getByName("debug"))
+            versionNameSuffix = "-I"
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
@@ -39,6 +45,46 @@ android {
     buildFeatures {
         compose = true
     }
+
+    flavorDimensions += listOf("app", "env", "tier")
+    productFlavors {
+        // App dimension
+        create("raconteur") {
+            dimension = "app"
+        }
+        create("clipify") {
+            dimension = "app"
+            applicationIdSuffix = ".clipify"
+            resValue("string", "app_name", "Clipify")
+        }
+
+        // Tier dimension
+        create("free") {
+            dimension = "tier"
+        }
+        create("paid") {
+            dimension = "tier"
+        }
+
+        // Environment Dimension
+        create("dev") {
+            dimension = "env"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            buildConfigField("String", "API_ENDPOINT", "\"https://api.dev.example.com\"")
+        }
+        create("staging") {
+            dimension = "env"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            buildConfigField("String", "API_ENDPOINT", "\"https://api.staging.example.com\"")
+        }
+        create("prod") {
+            dimension = "env"
+            buildConfigField("String", "API_ENDPOINT", "\"https://api.prod.example.com\"")
+        }
+    }
+
 }
 
 dependencies {

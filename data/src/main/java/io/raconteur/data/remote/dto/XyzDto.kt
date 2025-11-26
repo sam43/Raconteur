@@ -1,12 +1,12 @@
 package io.raconteur.data.remote.dto
 
-import io.raconteur.domain.model.Story
+import io.raconteur.domain.model.XyzData
 
-data class StoryDto(
+data class XyzDto(
     val id: String,
     val title: String,
     val content: String
 ) {
-    fun toDomain() = Story(id, title, content)
+    fun toDomain() = XyzData(id, title, content)
 }
 

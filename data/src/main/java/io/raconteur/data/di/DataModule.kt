@@ -1,9 +1,9 @@
 package io.raconteur.data.di
 
 import io.raconteur.core.dispatcher.DispatcherProvider
-import io.raconteur.data.remote.StoryApi
-import io.raconteur.data.repository.StoryRepositoryImpl
-import io.raconteur.domain.repository.StoryRepository
+import io.raconteur.data.remote.XyzApi
+import io.raconteur.data.repository.ClipifyRepositoryImpl
+import io.raconteur.domain.repository.ClipifyRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -24,6 +24,6 @@ val dataModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    single { get<Retrofit>().create(StoryApi::class.java) }
-    single<StoryRepository> { StoryRepositoryImpl(get(), get<DispatcherProvider>().io) }
+    single { get<Retrofit>().create(XyzApi::class.java) }
+    single<ClipifyRepository> { ClipifyRepositoryImpl(get(), get<DispatcherProvider>().io) }
 }
