@@ -9,21 +9,22 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.newshub.presentation.components.ArticleCard
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(
-    viewModel: NewsViewModel = hiltViewModel()
+    modifier: Modifier,
+    viewModel: NewsViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("NewsHub") },
+                modifier = modifier,
+                title = { Text("Raconteur") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -42,7 +43,6 @@ fun NewsScreen(
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
-
                 is NewsUiState.Success -> {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -53,7 +53,6 @@ fun NewsScreen(
                         }
                     }
                 }
-
                 is NewsUiState.Error -> {
                     Column(
                         modifier = Modifier.align(Alignment.Center),
